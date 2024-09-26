@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock title %}</title>
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+>
+</head>
+<body>
+  <nav class="navbar has-shadow is-dark" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        <!-- Your logo or text here -->
+      </a>
+  
+      <a role="button" class="navbar-burger" id="navbarBurger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item has-text-light">
+          Home
+        </a>
+        <a class="navbar-item has-text-light">
+          Documentation
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link has-text-light">
+            More
+          </a>
+          <div class="navbar-dropdown is-dark">
+            <a class="navbar-item has-text-light">
+              About
+            </a>
+            <a class="navbar-item has-text-light">
+              Jobs
+            </a>
+            <a class="navbar-item has-text-light">
+              Contact
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item has-text-light">
+              Report an issue
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            
+            {% if request.user.is_authenticated %}
+              
+            
+              
+            <a class="button is-light">
+              <strong>Hello {{user}}</strong>
+            </a>
+            <a class="button is-primary" href="">
+              <strong>Logout</strong>
+            </a>
+            {% else %}
+            <a class="button is-light" href="{% url 'login' %}">
+              Log in
+            </a>
+            <a class="button is-primary" href="{% url 'signup' %}">
+              <strong>Sign up</strong>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  
+
+  {% block content %}
+  
+  {% endblock content %}
+
+  <footer class="footer mb-auto">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Made</strong> by <a href="https://x.com/Matt_Riezie" target="_blank">Matt-Dev</a>.
+        &copy;
+       Copyright
+        <span id="year">
+        
+      </span>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/script.js' %}">
+
+  </script>
+</body>
+</html>
