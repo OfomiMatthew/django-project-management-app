@@ -8,73 +8,29 @@ Project Lists | ProjectPulse
 <section class="section">
   <div class="container">
     <h1 class="title has-text-centered">Project Lists</h1>
+    <div class="has-text-centered mb-5">
+      <a class="button is-primary" href="{% url 'add-project' %}">Add Project</a>
+    </div>
 
     <div class="columns is-multiline">
-      <!-- Project List Column -->
-      <div class="column is-one-third">
-        <div class="box">
-          <h2 class="subtitle">To Do</h2>
+      {% for project in projects %}
+        <div class="column is-one-third"> <!-- Adjust is-one-third for smaller or larger cards -->
+          <div class="box">
+            <h2 class="subtitle">To Do</h2>
 
-          <!-- Card Item -->
-          <div class="card">
-            <div class="card-content">
-              <p class="title">Project 1</p>
-              <p class="subtitle">Brief description of Project 1</p>
+            <!-- Card Item -->
+            <div class="card">
+              <a href="{% url 'project-detail' project.pk %}" class="card-footer-item">
+                <div class="card-content">
+                  <h5 class="subtitle has-text-link">{{ project.name }}</h5>
+                  <hr>
+                  <p class="subtitle">{{ project.description }}</p>
+                </div>
+              </a>
             </div>
-            <footer class="card-footer">
-              <a href="#" class="card-footer-item">View</a>
-              <a href="#" class="card-footer-item">Edit</a>
-              <a href="#" class="card-footer-item">Delete</a>
-            </footer>
           </div>
-
-          <!-- Add more cards as needed -->
         </div>
-      </div>
-
-      <!-- Project List Column -->
-      <div class="column is-one-third">
-        <div class="box">
-          <h2 class="subtitle">In Progress</h2>
-
-          <!-- Card Item -->
-          <div class="card">
-            <div class="card-content">
-              <p class="title">Project 2</p>
-              <p class="subtitle">Brief description of Project 2</p>
-            </div>
-            <footer class="card-footer">
-              <a href="#" class="card-footer-item">View</a>
-              <a href="#" class="card-footer-item">Edit</a>
-              <a href="#" class="card-footer-item">Delete</a>
-            </footer>
-          </div>
-
-          <!-- Add more cards as needed -->
-        </div>
-      </div>
-
-      <!-- Project List Column -->
-      <div class="column is-one-third">
-        <div class="box">
-          <h2 class="subtitle">Completed</h2>
-
-          <!-- Card Item -->
-          <div class="card">
-            <div class="card-content">
-              <p class="title">Project 3</p>
-              <p class="subtitle">Brief description of Project 3</p>
-            </div>
-            <footer class="card-footer">
-              <a href="#" class="card-footer-item">View</a>
-              <a href="#" class="card-footer-item">Edit</a>
-              <a href="#" class="card-footer-item">Delete</a>
-            </footer>
-          </div>
-
-          <!-- Add more cards as needed -->
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>

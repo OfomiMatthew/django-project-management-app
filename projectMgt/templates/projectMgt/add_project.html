@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Project | ProjectPulse
+{% endblock title %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half"> <!-- Adjust width by changing is-half to is-one-third, etc. -->
+        <h2 class="title is-3 has-text-centered">Add Project</h2>
+        <div class="box">
+          <form action="" method="POST">
+            {% csrf_token %}
+            
+            <!-- Project Name -->
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Project name" name="name" required>
+              </div>
+            </div>
+
+            <!-- Project Description -->
+            <div class="field">
+              <label class="label">Description</label>
+              <div class="control">
+                <textarea class="textarea" name="description" placeholder="Describe the project" required></textarea>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="field">
+              <div class="control has-text-centered">
+                <button class="button is-primary" type="submit">Submit Project</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

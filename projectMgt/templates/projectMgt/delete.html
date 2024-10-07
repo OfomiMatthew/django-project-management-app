@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete {{obj}}? | ProjectPulse
+{% endblock title %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half"> <!-- Adjust the width by changing "is-half" if needed -->
+        <div class="box has-text-centered">
+          <h5 class="title is-5">Are you sure you want to delete "{{ obj }}"?</h5>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="buttons is-centered">
+              <a href="{{ request.META.HTTP_REFERER }}" class="button is-light">Go back</a>
+              <input type="submit" value="Confirm" class="button is-danger">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

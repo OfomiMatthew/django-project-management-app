@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
-from .models import User
+from .models import *
 from django.contrib.auth import authenticate,login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def home(request):
-  return render(request,'projectMgt/project-list.html')
+# def home(request):
+#   return render(request,'projectMgt/project-list.html')
 
 def signup(request):
   if request.method == 'POST':
@@ -38,5 +39,47 @@ def log_in(request):
       print(user)
   return render(request,'projectMgt/login.html')
 
+@login_required
 def projects(request):
-  return render(request,'projectMgt/project-list.html')
+  projects = Project.objects.filter(created_by=request.user).order_by('-id')
+  return render(request,'projectMgt/project-list.html',{'projects':projects})
+
+@login_required
+def add_project(request):
+  if request.method == 'POST':
+    name = request.POST.get('name')
+    description = request.POST.get('description')
+    if name:
+      projects = Project.objects.create(name=name,description=description,created_by=request.user)
+      return redirect('projects')
+    
+  return render(request,'projectMgt/add_project.html')
+
+@login_required
+def project_details(request,pk):
+  project = Project.objects.filter(created_by=request.user).get(pk=pk)
+  return render(request,'projectMgt/project-detail.html',{'project':project})
+
+
+@login_required
+def edit_project(request,pk):
+  project = Project.objects.filter(created_by=request.user).get(pk=pk)
+  if request.method == 'POST':
+    name = request.POST.get('name')
+    description = request.POST.get('description')
+    if name:
+      project.name = name
+      project.description = description
+      project.save()
+      return redirect('projects')
+  return render(request,'projectMgt/project-edit.html',{'project':project})
+
+
+@login_required
+def delete_project(request,pk):
+  project = Project.objects.filter(created_by=request.user).get(pk=pk)
+  if request.method == 'POST':
+    project.delete()
+    return redirect('projects')
+ 
+  return render(request,'projectMgt/delete.html',{'obj':project})

@@ -9,30 +9,22 @@ Project Details | ProjectPulse
   <div class="container">
     <!-- Project Header -->
     <div class="box">
-      <h1 class="title">Project Title</h1>
-      <p class="subtitle">Brief description of the project. This can include the project's objectives, goals, and other relevant details.</p>
+      <h1 class="title">{{project.name}}</h1>
+
     </div>
 
     <!-- Project Details -->
     <div class="columns">
       <div class="column is-two-thirds">
         <div class="box">
-          <h2 class="subtitle">Project Information</h2>
+         
           <div class="content">
-            <p><strong>Start Date:</strong> January 1, 2024</p>
-            <p><strong>End Date:</strong> December 31, 2024</p>
-            <p><strong>Status:</strong> In Progress</p>
-            <p><strong>Assigned To:</strong> John Doe</p>
-            <p><strong>Description:</strong> A detailed description of the project goes here, including goals, milestones, and any other relevant information.</p>
+      
+            <p><strong>Description:</strong> {{project.description}}</p>
           </div>
         </div>
         
-        <!-- Project Progress -->
-        <div class="box">
-          <h2 class="subtitle">Progress</h2>
-          <progress class="progress is-primary" value="70" max="100">70%</progress>
-          <p>Progress: 70% complete</p>
-        </div>
+     
       </div>
 
       <!-- Project Actions -->
@@ -40,13 +32,16 @@ Project Details | ProjectPulse
         <div class="box">
           <h2 class="subtitle">Actions</h2>
           <div class="buttons">
-            <a href="#" class="button is-primary is-fullwidth">Edit Project</a>
-            <a href="#" class="button is-link is-fullwidth">View Details</a>
-            <a href="#" class="button is-danger is-fullwidth">Delete Project</a>
+            <a href="{% url 'project-edit' project.pk %}" class="button is-primary is-fullwidth">Edit Project</a>
+            {% comment %} <a href="{% url 'project-detail' project.pk %}" class="button is-link is-fullwidth">View Details</a> {% endcomment %}
+            <a href="{% url 'project-delete' project.pk %}" class="button is-danger is-fullwidth">Delete Project</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  {% comment %} {% for todo in todolist  %}
+  {% endfor %} {% endcomment %}
 </section>
 {% endblock content %}
